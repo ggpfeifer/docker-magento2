@@ -2,18 +2,31 @@ version: '3.0'
 services:
   web:
     image: alexcheng/magento2
+    deploy:
+      resources:
+        limits:
+          cpus: '6'
+          memory: 7503M
+        reservations:
+          cpus: '6'
+          memory: 7503M    
     ports:
       - "80:80"
     links:
       - db
     volumes: 
       - magento-data:/var/www/html  
+      - ./kdu-app:/var/www/html/app/code
+      - ./pago-facil-core:/var/pago-facil-core
     env_file:
       - env
   db:
     image: mysql:5.6.23
+    ports:
+      - "3306:3306"     
     volumes:
       - db-data:/var/lib/mysql/data
+      - ./mysqlconf:/etc/mysql
     env_file:
       - env
   phpmyadmin:
@@ -24,4 +37,4 @@ services:
       - db     
 volumes:
   magento-data:
-  db-data: 
+  db-data:
