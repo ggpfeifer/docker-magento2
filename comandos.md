@@ -28,9 +28,9 @@ rm -rf generated/*
 php bin/magento setup:upgrade
 php bin/magento setup:di:compile
 
-php bin/magento setup:static-content:deploy -f en_GB
+# php bin/magento setup:static-content:deploy -f en_GB
 # php bin/magento setup:static-content:deploy -f en_US #en el caso que contenido estatico sea en_US
-chmod -R 0777 var generated/ pub
+chmod -R 0777 var generated/ pub dev lib
 ```
 
 ## mostrar log de debug
